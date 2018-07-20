@@ -1,0 +1,397 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "CherryPick Swagger",
+        "description": "human-readable documentation for API.",
+        "version": "1.0"
+    },
+    "host": "api_test",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "login user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Data for user login",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/LoginUserResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Error Validation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/recipe/{id}": {
+            "get": {
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Get recipe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of recipe",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token for auth",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/Recipe"
+                        }
+                    },
+                    "422": {
+                        "description": "Error Validation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Update recipe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of recipe",
+                        "type": "string"
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token for auth",
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "params for recipe",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RecipeCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/IdResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Error Validation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Recipe delete",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token for auth",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of Recipe",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "404": {
+                        "description": "candidateId not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/recipe": {
+            "post": {
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Create recipe",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token for auth",
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "params for recipe",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RecipeCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/IdResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Error Validation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/recipe/image/{id}": {
+            "post": {
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Create recipe json",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of recipe",
+                        "type": "string"
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token for auth",
+                        "type": "string"
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "description": "Id of candidate",
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "422": {
+                        "description": "Error Validation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "register new user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Data for user registration",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RegisterUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/RegisterUserResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Error Validation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "LoginUserRequest": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "example@gamil.com"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "LoginUserRequest"
+            }
+        },
+        "LoginUserResponse": {
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "LoginUserResponse"
+            }
+        },
+        "RegisterUserRequest": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "example@gamil.com"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "RegisterUserRequest"
+            }
+        },
+        "RegisterUserResponse": {
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "RegisterUserResponse"
+            }
+        },
+        "IdResponse": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "IdResponse"
+            }
+        },
+        "Ingredient": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "cheese"
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Ingredient"
+            }
+        },
+        "Recipe": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Pizza"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "ingredients": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Ingredient"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "Recipe"
+            }
+        },
+        "RecipeCreate": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Pizza"
+                },
+                "ingredients": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Ingredient"
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "RecipeCreate"
+            }
+        }
+    }
+}
